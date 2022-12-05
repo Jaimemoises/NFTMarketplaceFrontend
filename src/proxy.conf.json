@@ -1,5 +1,5 @@
 {
-    "/api/*":{
+    "/*":{
         "target": "https://www.jaimedev7.com/",
         "secure": false,
         "logLevel": "debug"

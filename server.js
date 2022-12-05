@@ -2,14 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const cors = require("cors")
-
-app.use(
-    cors({
-        origin:"https://www.jaimedev7.com/",
-        credentials: true,
-    })
-)
 //app.use(function(req, res, next){
     ///res.header("Access-Control-Allow-Origin", "*");
     //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
@@ -20,7 +12,7 @@ app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
    // res.setHeader('Access-Control-Allow-Origin', '*');
-   res.header("Access-Control-Allow-Origin", "*");
+res.header("Access-Control-Allow-Origin", "*");
 
     // Request methods you wish to allow
    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
