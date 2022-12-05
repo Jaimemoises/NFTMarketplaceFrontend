@@ -1,6 +1,15 @@
 const express = require('express');
-const path = require('path');
-const app = express();
+//const path = require('path');
+//const app = express();
+const cors = require("cors")
+
+app.use(
+    cors({
+        origin: "https://www.jaimedev7.com/",
+    })
+)
+
+
 
 //app.use(function(req, res, next){
     ///res.header("Access-Control-Allow-Origin", "*");
@@ -8,15 +17,15 @@ const app = express();
     //next();
 //});
 
-app.use(function (req, res, next) {
+//app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
    // res.setHeader('Access-Control-Allow-Origin', '*');
-   res.header("Access-Control-Allow-Origin", "*");
+   //res.header("Access-Control-Allow-Origin", "*");
 
     // Request methods you wish to allow
    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
+//res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
     // Request headers you wish to allow
     //res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
@@ -25,8 +34,8 @@ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-T
     //res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
-    next();
-});
+   // next();
+//});
 
 app.use(express.static(__dirname + '/dist/angular-ecommerce'));
 app.get('/*', function(req,res) {res.sendFile(path.join(__dirname+'/dist/angular-ecommerce/index.html'));});
