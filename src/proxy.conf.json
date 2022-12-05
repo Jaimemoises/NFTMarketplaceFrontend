@@ -1,6 +1,6 @@
 {
     "/*":{
-        "target": "http://localhost:4200",
+        "target": "https://nftmarketplaceecommerce.herokuapp.com/",
         "secure": false,
         "logLevel": "debug"
     }
