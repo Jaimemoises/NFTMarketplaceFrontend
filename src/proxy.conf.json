@@ -2,6 +2,7 @@
     "/api/*":{
         "target": "https://www.jaimedev7.com/",
         "secure": false,
+        "changeOrigin": true,
         "logLevel": "debug"
     }
 }
