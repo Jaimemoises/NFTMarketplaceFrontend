@@ -1,6 +1,6 @@
 {
     "/*":{
-        "target": "http://localhost:4200",
+        "target": "https://ecommerce-frontendnft.herokuapp.com",
         "secure": false,
         "logLevel": "debug"
     }
