@@ -10,8 +10,10 @@ import { State } from '../common/state';
 })
 export class NFTMarketPlaceFormService {
 
-  private countriesUrl = 'http://localhost:8080/api/countries';
-  private statesUrl = 'http://localhost:8080/api/states';
+  //private countriesUrl = 'http://localhost:8080/api/countries';
+  private countriesUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/countries';
+  //private statesUrl = 'http://localhost:8080/api/states';
+  private statesUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/states';
 
   constructor(private httpClient: HttpClient) { }
 
