@@ -7,6 +7,7 @@ const cors = require("cors")
 app.use(
     cors({
         origin:"https://www.jaimedev7.com/",
+        credentials: true,
     })
 )
 //app.use(function(req, res, next){
