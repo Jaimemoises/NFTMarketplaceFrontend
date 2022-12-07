@@ -13,12 +13,12 @@ export class BasketService {
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
   //storage: Storage = sessionStorage;
-  storage: Storage = localStorage;
+  storage: Storage = sessionStorage;
 
   constructor() {
 
     //Read data from storage
-    let data = JSON.parse(this.storage.getItem('basketItems'));
+    let data = JSON.parse(this.storage.getItem('basketItems')!);
 
     if(data != null){
       this.basketItems = data;

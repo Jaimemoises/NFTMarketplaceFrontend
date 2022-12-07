@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
       el: '#okta-sign-in-widget'}, // this name should be same as div tag id in login.component.html
 
-      (response) => {
+      (response: any) => {
 
         if (response.status === 'SUCCESS') {
 
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
       },
 
-      (error) => {
+      (error: any) => {
 
         throw error;
 

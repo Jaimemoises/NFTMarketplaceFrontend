@@ -44,8 +44,10 @@ export class CheckoutComponent implements OnInit {
   stripe = Stripe(environment.stripePublishableKey);
 
   paymentInfo: PaymentInfo = new PaymentInfo();
-  cardElement: any;
-  displayError: any = "";
+  cardElement:any;
+  displayError:any;
+
+  isDisabled: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,13 +72,13 @@ export class CheckoutComponent implements OnInit {
         firstName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
-          NftMarketPlaceValidators.notOnlyWhiteSpace,
+          NftMarketPlaceValidators.notOnlyWhitespace,
         ]),
 
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
-          NftMarketPlaceValidators.notOnlyWhiteSpace,
+          NftMarketPlaceValidators.notOnlyWhitespace,
         ]),
 
         email: new FormControl(theEmail, [
@@ -86,13 +88,13 @@ export class CheckoutComponent implements OnInit {
       }),
       billingAddress: this.formBuilder.group({
         street: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                    NftMarketPlaceValidators.notOnlyWhiteSpace]),
+          NftMarketPlaceValidators.notOnlyWhitespace]),
         city: new FormControl('', [Validators.required, Validators.minLength(2), 
-          NftMarketPlaceValidators.notOnlyWhiteSpace]),
+          NftMarketPlaceValidators.notOnlyWhitespace]),
         state: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
         zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
-          NftMarketPlaceValidators.notOnlyWhiteSpace])
+          NftMarketPlaceValidators.notOnlyWhitespace])
       }),
       creditCard: this.formBuilder.group({
         /*
@@ -253,6 +255,9 @@ export class CheckoutComponent implements OnInit {
     //compute payment info
     this.paymentInfo.amount = this.totalPrice * 100;
     this.paymentInfo.currency = "EUR";
+    this.paymentInfo.receiptEmail = purchase.customer.email; 
+
+    console.log(`this.paymentInfo.amount: ${this.paymentInfo.amount}`);
 
     //if valid form then
     // - create payment intent
@@ -261,18 +266,32 @@ export class CheckoutComponent implements OnInit {
 
     if (!this.checkoutFormGroup.invalid && this.displayError.textContent === "") {
 
+      this.isDisabled = true;
+
       this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
         (paymentIntentResponse) => {
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
             {
               payment_method: {
-                card: this.cardElement
+                card: this.cardElement,
+                billing_details: {
+                  email: purchase.customer.email,
+                  name: `${purchase.customer.firstName} ${purchase.customer.lastName}`,
+                  address: {
+                    line1: purchase.billingAddress.street,
+                    city: purchase.billingAddress.city,
+                    state: purchase.billingAddress.state,
+                    postal_code: purchase.billingAddress.zipCode,
+                    country: this.billingAddressCountry?.value.code
+                  }
+                }
               }
             }, { handleActions: false })
           .then((result: any) => {
             if (result.error) {
               // inform the customer there was an error
               alert(`There was an error: ${result.error.message}`);
+              this.isDisabled = false;
             } else {
               // call REST API via the CheckoutService
               this.checkoutService.placeOrder(purchase).subscribe({
@@ -281,9 +300,11 @@ export class CheckoutComponent implements OnInit {
 
                   // reset cart
                   this.resetBasket();
+                  this.isDisabled = false;
                 },
                 error: (err: any) => {
                   alert(`There was an error: ${err.message}`);
+                  this.isDisabled = false;
                 }
               })
             }            
@@ -302,6 +323,7 @@ export class CheckoutComponent implements OnInit {
     this.basketService.basketItems = [];
     this.basketService.totalPrice.next(0);
     this.basketService.totalQuantity.next(0);
+    this.basketService.persistBasketItems();
 
     //reset the form
     this.checkoutFormGroup.reset();
@@ -311,6 +333,7 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  /*
   handleMonthsAndYears() {
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
 
@@ -340,23 +363,27 @@ export class CheckoutComponent implements OnInit {
         this.creditCardMonths = data;
       });
   }
+*/
 
   getStates(formGroupName: string) {
-    const FormGroup = this.checkoutFormGroup.get(formGroupName);
 
-    const countryCode = FormGroup.value.country.code;
-    const countryName = FormGroup.value.country.name;
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+
+    const countryCode = formGroup?.value.country.code;
+    const countryName = formGroup?.value.country.name;
 
     console.log(`${formGroupName} country code: ${countryCode}`);
     console.log(`${formGroupName} country name: ${countryName}`);
 
-    this.nftMarketPlaceFormService.getStates(countryCode).subscribe((data) => {
+    this.nftMarketPlaceFormService.getStates(countryCode).subscribe(
+      data => {
       if (formGroupName === 'billingAddress') {
         this.billingAddressStates = data;
       }
 
       //select first item by default
-      FormGroup.get('state').setValue(data[0]);
-    });
-  }
+    formGroup?.get('state')?.setValue(data[0]);
+    }
+  );
+}
 }

@@ -13,7 +13,7 @@ export class ProductService {
 
   //ROOT_UR1: String="http://ecommerce2.eu-west-1.elasticbeanstalk.com/";
 
- 
+
   //private baseUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/products'; //?size=100 to change the page size to show more items
   private baseUrl = environment.ecommerceApiUrl + '/products'; //?size=100 to change the page size to show more items
 
@@ -58,9 +58,9 @@ export class ProductService {
   searchProducts(theKeyword: string): Observable<Product[]> {
 
      //need to build URL based on keyword
-     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
 
-     return this.getProducts(searchUrl);
+    return this.getProducts(searchUrl);
   }
 
   searchProductsPaginate(thePage: number, 
