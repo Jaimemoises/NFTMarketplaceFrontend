@@ -2,11 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
-  ecommerceApiUrl: "https://localhost:8443/api",
-  stripePublishableKey: "pk_test_51MCLPmKEZxuUlt0C9x1Tqx9wplVBlqzV6OM47Yycl5z20Ly2iEZ4QdgaC9Q0Xe5vDviSQzalyXTTkZZg42OxO3eX00cS1s2DfI"
-};
+//export const environment = {
+ // production: false,
+  //ecommerceApiUrl: "https://localhost:9898/api"
+//};
 
 /*
  * For easier debugging in development mode, you can import the following file

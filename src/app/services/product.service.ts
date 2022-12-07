@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,11 @@ export class ProductService {
   //ROOT_UR1: String="http://ecommerce2.eu-west-1.elasticbeanstalk.com/";
 
  
-  private baseUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/products'; //?size=100 to change the page size to show more items
-  //private baseUrl = 'http://localhost:8080/api/products'; //?size=100 to change the page size to show more items
+  //private baseUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/products'; //?size=100 to change the page size to show more items
+  private baseUrl = environment.ecommerceApiUrl + '/products'; //?size=100 to change the page size to show more items
 
-  private categoryUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/product-category';
-  //private categoryUrl = 'http://localhost:8080/api/product-category';
+  //private categoryUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/product-category';
+  private categoryUrl = environment.ecommerceApiUrl + '/product-category';
 
   constructor(private httpClient: HttpClient) { }
 

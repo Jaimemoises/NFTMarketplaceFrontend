@@ -12,7 +12,22 @@ export class BasketService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  constructor() {}
+  //storage: Storage = sessionStorage;
+  storage: Storage = localStorage;
+
+  constructor() {
+
+    //Read data from storage
+    let data = JSON.parse(this.storage.getItem('basketItems'));
+
+    if(data != null){
+      this.basketItems = data;
+
+      //compute totals based on the data that is read from storage
+      this.computeBasketTotals();
+    }
+
+  }
 
   addToBasket(theBasketItem: BasketItem) {
     //to check if we have the item in our basket
@@ -56,6 +71,13 @@ export class BasketService {
 
     //log basket for debugging
     this.logBasketData(totalPriceValue, totalQuantityValue);
+
+    //persist basket data
+    this.persistBasketItems();
+  }
+
+  persistBasketItems(){
+    this.storage.setItem('basketItems', JSON.stringify(this.basketItems));
   }
 
   logBasketData(totalPriceValue: number, totalQuantityValue: number) {

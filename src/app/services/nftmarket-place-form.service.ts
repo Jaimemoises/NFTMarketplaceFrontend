@@ -4,16 +4,17 @@ import { Observable, of } from 'rxjs';
 import { Country } from '../common/country';
 import { map } from 'rxjs/operators';
 import { State } from '../common/state';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NFTMarketPlaceFormService {
 
-  //private countriesUrl = 'http://localhost:8080/api/countries';
-  private countriesUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/countries';
-  //private statesUrl = 'http://localhost:8080/api/states';
-  private statesUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/states';
+  private countriesUrl = environment.ecommerceApiUrl + '/countries';
+  //private countriesUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/countries';
+  private statesUrl = environment.ecommerceApiUrl + '/states';
+  //private statesUrl = 'https://nftmarketplaceecommerce.herokuapp.com/api/states';
 
   constructor(private httpClient: HttpClient) { }
 
