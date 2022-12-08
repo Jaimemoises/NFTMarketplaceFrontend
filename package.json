@@ -6,7 +6,7 @@
     "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "heroku": "ng build --prod",
+    "heroku": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
