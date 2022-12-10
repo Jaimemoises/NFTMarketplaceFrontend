@@ -13,13 +13,13 @@
                         </a>
                     
                         <h1>
-                            <a routerLink="/products/{{ tempProduct.id }}" routerLinkActive="active-link">
+                            <a class="link-color" routerLink="/products/{{ tempProduct.id }}" routerLinkActive="active-link">
                                 {{ tempProduct.name }}
                             </a>
                         </h1>
 
                         <div class="price">{{ tempProduct.unitPrice | currency: 'EUR' }}</div>
-                        <button (click)="addToBasket(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                        <button (click)="addToBasket(tempProduct)" class="btn btn-dark btn-sm">Add to basket</button>
                     </div>
                 </div>
 

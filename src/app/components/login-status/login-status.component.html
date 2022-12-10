@@ -4,12 +4,12 @@
         Welcome back {{ userFullName }}!
     </div>
 
-    <button *ngIf="!isAuthenticated" routerLink="/login" class="security-btn">Login</button>
+    <div class="btnlogin"><button *ngIf="!isAuthenticated" routerLink="/login" class="btn btn-light">Login</button></div>
 
-    <button *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</button>
+    <div class="btnlogin"><button *ngIf="isAuthenticated" (click)="logout()" class="btn btn-light">Logout</button></div>
 
-    <button *ngIf="isAuthenticated" routerLink="/members" class="security-btn ml-1">Member</button>
+    <div class="btnlogin"><button *ngIf="isAuthenticated" routerLink="/members" class="btn btn-light">Member</button></div>
 
-    <button *ngIf="isAuthenticated" routerLink="/order-history" class="security-btn ml-1">Orders</button>
+    <div class="btnlogin"><button *ngIf="isAuthenticated" routerLink="/order-history" class="btn btn-light">Orders</button></div>
 
 </div>

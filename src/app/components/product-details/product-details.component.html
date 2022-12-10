@@ -6,12 +6,12 @@
 
         <h3>{{ product.name }}</h3>
         <div class="price">{{ product.unitPrice | currency:'EUR' }}</div>
-        <button (click)="addToBasket()" class="btn btn-primary btn-sm">Add to basket</button>
+        <button (click)="addToBasket()" class="btn btn-dark btn-sm">Add to basket</button>
 
         <hr>
         <h4>Description</h4>
         <p>{{ product.description }}</p>
     </ng-container>
-        <a routerLink="/products" class="mt-5">Back to Product List</a>
+        <a routerLink="/products" class="mt-4">Back to Product List</a>
     </div>
 </div>
