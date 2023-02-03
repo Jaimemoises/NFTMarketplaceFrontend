@@ -27,6 +27,7 @@
     "@fortawesome/fontawesome-free": "^5.12.0",
     "@ng-bootstrap/ng-bootstrap": "^13.1.1",
     "bootstrap": "^4.4.1",
+    "ngx-build-plus": "^15.0.0",
     "rxjs": "~6.5.4",
     "stripe": "^8.179.0",
     "tslib": "^2.0.0",
